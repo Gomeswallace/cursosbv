@@ -36,6 +36,10 @@ public class Equipamento implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	@Override
 	public int hashCode() {
@@ -61,7 +65,4 @@ public class Equipamento implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-		
 }
