@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,9 @@ public class EquipamentoResource {
 	
 	//mapear o metodo no endpoin equipamentos como POST 
 	@RequestMapping(method = RequestMethod.POST) //@RequestBody permite que o obj seja construido a partir do json enviado 	
-	public ResponseEntity<Void> insert(@RequestBody Equipamento obj){
+	public ResponseEntity<Void> insert(@Valid @RequestBody EquipamentoDTO objDTO){
+		Equipamento obj = service.fromDTO(objDTO);
+				
 		//ver http status code
 		obj = service.insert(obj); 
 		//o http tem seus codigos de retorno apos realizar a operacao

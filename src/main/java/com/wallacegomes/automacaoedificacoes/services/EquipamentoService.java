@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.wallacegomes.automacaoedificacoes.domain.Equipamento;
+import com.wallacegomes.automacaoedificacoes.dto.EquipamentoDTO;
 import com.wallacegomes.automacaoedificacoes.repositories.EquipamentoRepository;
 import com.wallacegomes.automacaoedificacoes.services.exceptions.DataIntegrityException;
 
@@ -56,5 +57,9 @@ public class EquipamentoService {
 	public Page<Equipamento> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Equipamento fromDTO(EquipamentoDTO objDTO) {
+			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.isStatus(), objDTO.getTipoEquipamento());
 	}
 }
