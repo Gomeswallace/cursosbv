@@ -2,31 +2,29 @@ package com.wallacegomes.automacaoedificacoes.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-
 import com.wallacegomes.automacaoedificacoes.domain.Ambiente;
-import com.wallacegomes.automacaoedificacoes.repositories.AmbienteRepository;
+import com.wallacegomes.automacaoedificacoes.domain.Usuario;
+import com.wallacegomes.automacaoedificacoes.repositories.UsuarioRepository;
 
-public class AmbienteService {
+public class UsuarioService {
 	@Autowired
-	public AmbienteRepository repo;
+	public UsuarioRepository repo;
 	
-	public Ambiente find(Integer id) {
-		Optional<Ambiente> obj = repo.findById(id);
+	public Usuario find(Integer id) {
+		Optional<Usuario> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Ambiente.class.getName(), null));
-	}
+	}	
 	
-	
-	public Ambiente insert(Ambiente obj) {
-		obj.setId(null); //id null para garantir a insercao		
+	public Usuario insert(Usuario obj) {
+		obj.setId(null);;		
 		return repo.save(obj);		
 	}
 	
-	public Ambiente update(Ambiente obj) {
+	public Usuario update(Usuario obj) {
 		find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
 		return repo.save(obj);
 	}
@@ -36,11 +34,11 @@ public class AmbienteService {
 		try {			
 			repo.deleteById(id);			
 		} catch (DataIntegrityViolationException ex) {
-			throw new DataIntegrityViolationException("Não é possível excluir um Ambiente que possui Recursos!");
+			throw new DataIntegrityViolationException("Não é possível excluir um Usuario!");
 		}
 	}
 	
-	public List<Ambiente> findAll(){
+	public List<Usuario> findAll(){
 		return repo.findAll();
-	}
+}
 }

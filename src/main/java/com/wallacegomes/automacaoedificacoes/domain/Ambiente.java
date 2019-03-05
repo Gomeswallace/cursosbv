@@ -3,13 +3,17 @@ package com.wallacegomes.automacaoedificacoes.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+@Entity
 public class Ambiente {
 
 	@Id
@@ -17,23 +21,23 @@ public class Ambiente {
 	private Integer id;
 	private String nome;
 	private String descricao;
-
-	/*
+	
 	@JsonManagedReference
 	@ManyToMany
-	@JoinTable(name="AMBIENTE_RECURSO",
+	@JoinTable(name="AMBIENTE_EQUIPAMENTO",
 		joinColumns = @JoinColumn(name="ambiente_id"),
-		inverseJoinColumns = @JoinColumn(name="recurso_id")
-			)
-	private List<Recurso> recursos = new ArrayList<>();
+		inverseJoinColumns = @JoinColumn(name="equipamento_id")
+	)
+	
+	private List<Equipamento> equipamentos = new ArrayList<>();
+	
+	/*
+	@JsonIgnore
+	@OneToMany(mappedBy = "ambiente")
+	private List<Equipamento> equipamentos = new ArrayList<>();
 	*/
 	
-	//@JsonIgnore
-	//@OneToMany(mappedBy = "ambiente")
-	private List<Equipamento> recursos = new ArrayList<>();
-	
-	public Ambiente() {
-		
+	public Ambiente() {		
 	}
 	
 	public Ambiente(Integer id, String nome, String descricao) {
@@ -68,12 +72,12 @@ public class Ambiente {
 	}
 	
 	
-	public List<Equipamento> getRecursos() {
-		return recursos;
+	public List<Equipamento> getEquipamentos() {
+		return equipamentos;
 	}
 
-	public void setRecursos(List<Equipamento> recursos) {
-		this.recursos = recursos;
+	public void setEquipamentos(List<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
 	}
 	
 	@Override

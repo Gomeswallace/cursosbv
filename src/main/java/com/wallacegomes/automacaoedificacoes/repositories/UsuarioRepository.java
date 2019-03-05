@@ -2,9 +2,9 @@ package com.wallacegomes.automacaoedificacoes.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.wallacegomes.automacaoedificacoes.domain.Ambiente;
+import com.wallacegomes.automacaoedificacoes.domain.Usuario;
 
 @Repository
-public interface AmbienteRepository extends JpaRepository<Ambiente, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
 }

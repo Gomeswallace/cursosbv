@@ -1,11 +1,20 @@
 package com.wallacegomes.automacaoedificacoes.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Equipamento implements Serializable{	
@@ -15,18 +24,35 @@ public class Equipamento implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //geracao de chave primaria
 	private Integer id;
 	private String nome;
-
+	private boolean status;
+	
+	@JsonManagedReference
+	@ManyToOne
+	@JoinColumn(name="tipoequipamento_id")
+	private TipoEquipamento tipoEquipamento;
+	
+	@JsonBackReference
+	@JsonIgnore
+	@ManyToMany(mappedBy="equipamentos") //indica que o mapeamento foi realizado do outro para equipamentos
+	private List<Ambiente> ambientes = new ArrayList<>();
+	
 	public Equipamento() {		
 	}
 
-	public Equipamento(Integer id, String nome) {
+	public Equipamento(Integer id, String nome, boolean status, TipoEquipamento tipoEquipamento) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.status = status;
+		this.tipoEquipamento = tipoEquipamento;		
 	}
-
+	
 	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -37,10 +63,31 @@ public class Equipamento implements Serializable{
 		this.nome = nome;
 	}
 	
-	public void setId(Integer id) {
-		this.id = id;
+	public boolean isStatus() {
+		return status;
 	}
 
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	public List<Ambiente> getAmbientes() {
+		return ambientes;
+	}
+
+	public void setAmbientes(List<Ambiente> ambientes) {
+		this.ambientes = ambientes;
+	}
+	
+	public TipoEquipamento getTipoEquipamento() {
+		return tipoEquipamento;
+	}
+
+	public void setTipoEquipamento(TipoEquipamento tipoEquipamento) {
+		this.tipoEquipamento = tipoEquipamento;
+	}
+
+	//hashCode e Equals para comparar o objeto pelo conteudo e nao pela referencia
 	@Override
 	public int hashCode() {
 		final int prime = 31;

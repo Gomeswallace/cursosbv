@@ -1,65 +1,57 @@
 package com.wallacegomes.automacaoedificacoes.domain;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
-public class TipoDispositivo implements Serializable {
+@Entity
+public class TipoEquipamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Integer quantidadePortasAnalog;
-	private Integer quantidadePortasDig;
 	
-	public TipoDispositivo() {
+	@JsonBackReference
+	@OneToMany(mappedBy="tipoEquipamento")
+	private List<Equipamento> equipamentos = new ArrayList<>();
+	
+	public TipoEquipamento() {
 		
 	}
-	
-	public TipoDispositivo(Integer id, String nome, Integer quantidadePortasAnalog, Integer quantidadePortasDig) {
+	public TipoEquipamento(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.quantidadePortasAnalog = quantidadePortasAnalog;
-		this.quantidadePortasDig = quantidadePortasDig;
 	}
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	public Integer getQuantidadePortasAnalog() {
-		return quantidadePortasAnalog;
+	
+		
+	public List<Equipamento> getEquipamentos() {
+		return equipamentos;
 	}
-
-	public void setQuantidadePortasAnalog(Integer quantidadePortasAnalog) {
-		this.quantidadePortasAnalog = quantidadePortasAnalog;
+	public void setEquipamentos(List<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
 	}
-
-	public Integer getQuantidadePortasDig() {
-		return quantidadePortasDig;
-	}
-
-	public void setQuantidadePortasDig(Integer quantidadePortasDig) {
-		this.quantidadePortasDig = quantidadePortasDig;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,7 +59,7 @@ public class TipoDispositivo implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,12 +68,12 @@ public class TipoDispositivo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoDispositivo other = (TipoDispositivo) obj;
+		TipoEquipamento other = (TipoEquipamento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
+	}	
 }
