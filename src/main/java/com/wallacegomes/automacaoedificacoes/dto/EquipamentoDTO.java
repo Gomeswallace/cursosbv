@@ -1,13 +1,10 @@
 package com.wallacegomes.automacaoedificacoes.dto;
 
 import java.io.Serializable;
-
 import javax.validation.constraints.NotEmpty;
-
 import org.hibernate.validator.constraints.Length;
-
 import com.wallacegomes.automacaoedificacoes.domain.Equipamento;
-import com.wallacegomes.automacaoedificacoes.domain.TipoEquipamento;
+import com.wallacegomes.automacaoedificacoes.domain.enums.TipoEquipamento;;
 
 public class EquipamentoDTO implements Serializable{	
 	private static final long serialVersionUID = 1L;
@@ -18,7 +15,7 @@ public class EquipamentoDTO implements Serializable{
 	@Length(min=5, max=80, message="O tamanho deve ser entre 3 e 80 caracteres!")
 	private String nome;
 	private boolean status;
-	private TipoEquipamento tipoEquipamento;
+	private TipoEquipamento tipo; 
 	
 	public EquipamentoDTO() {		
 	}
@@ -28,7 +25,7 @@ public class EquipamentoDTO implements Serializable{
 		id = obj.getId();
 		nome = obj.getNome();
 		status = obj.isStatus();
-		tipoEquipamento = obj.getTipoEquipamento();
+		tipo = obj.getTipo();
 	}
 
 	public Integer getId() {
@@ -55,11 +52,11 @@ public class EquipamentoDTO implements Serializable{
 		this.status = status;
 	}
 
-	public TipoEquipamento getTipoEquipamento() {
-		return tipoEquipamento;
+	public TipoEquipamento getTipo() {
+		return tipo;
 	}
 
-	public void setTipoEquipamento(TipoEquipamento tipoEquipamento) {
-		this.tipoEquipamento = tipoEquipamento;
-	}
+	public void setTipo(TipoEquipamento tipo) {
+		this.tipo = tipo;
+	}	
 }

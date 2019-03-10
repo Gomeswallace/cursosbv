@@ -2,7 +2,6 @@ package com.wallacegomes.automacaoedificacoes.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -27,9 +28,13 @@ public class Ambiente {
 	@JoinTable(name="AMBIENTE_EQUIPAMENTO",
 		joinColumns = @JoinColumn(name="ambiente_id"),
 		inverseJoinColumns = @JoinColumn(name="equipamento_id")
-	)
-	
+	)	
 	private List<Equipamento> equipamentos = new ArrayList<>();
+	
+	@JsonBackReference
+	@JsonIgnore
+	@ManyToMany(mappedBy="ambientes") //indica que o mapeamento foi realizado do outro para equipamentos
+	private List<Dispositivo> dispositivos = new ArrayList<>();
 	
 	/*
 	@JsonIgnore

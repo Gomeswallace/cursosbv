@@ -60,6 +60,6 @@ public class EquipamentoService {
 	}
 	
 	public Equipamento fromDTO(EquipamentoDTO objDTO) {
-			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.isStatus(), objDTO.getTipoEquipamento());
+			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.isStatus(), objDTO.getTipo());
 	}
 }

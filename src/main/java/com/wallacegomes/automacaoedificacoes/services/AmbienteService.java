@@ -2,12 +2,14 @@ package com.wallacegomes.automacaoedificacoes.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import com.wallacegomes.automacaoedificacoes.domain.Ambiente;
+import com.wallacegomes.automacaoedificacoes.dto.AmbienteDTO;
 import com.wallacegomes.automacaoedificacoes.repositories.AmbienteRepository;
 
 public class AmbienteService {
@@ -42,5 +44,14 @@ public class AmbienteService {
 	
 	public List<Ambiente> findAll(){
 		return repo.findAll();
+	}
+	
+	public Page<Ambiente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
+	}
+	
+	public Ambiente fromDTO(AmbienteDTO objDTO) {
+			return new Ambiente(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao());
 	}
 }

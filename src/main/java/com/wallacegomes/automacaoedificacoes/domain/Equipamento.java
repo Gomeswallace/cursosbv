@@ -3,18 +3,14 @@ package com.wallacegomes.automacaoedificacoes.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.wallacegomes.automacaoedificacoes.domain.enums.TipoEquipamento;
 
 @Entity
 public class Equipamento implements Serializable{	
@@ -25,11 +21,13 @@ public class Equipamento implements Serializable{
 	private Integer id;
 	private String nome;
 	private boolean status;
+	private Integer tipo;
 	
-	@JsonManagedReference
+	/*@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="tipoequipamento_id")
 	private TipoEquipamento tipoEquipamento;
+	*/
 	
 	@JsonBackReference
 	@JsonIgnore
@@ -44,7 +42,7 @@ public class Equipamento implements Serializable{
 		this.id = id;
 		this.nome = nome;
 		this.status = status;
-		this.tipoEquipamento = tipoEquipamento;		
+		this.tipo = tipoEquipamento.getCod();
 	}
 	
 	public Integer getId() {
@@ -79,12 +77,12 @@ public class Equipamento implements Serializable{
 		this.ambientes = ambientes;
 	}
 	
-	public TipoEquipamento getTipoEquipamento() {
-		return tipoEquipamento;
+	public TipoEquipamento getTipo() {
+		return TipoEquipamento.toEnum(tipo);
 	}
 
-	public void setTipoEquipamento(TipoEquipamento tipoEquipamento) {
-		this.tipoEquipamento = tipoEquipamento;
+	public void setTipo(TipoEquipamento tipo) {
+		this.tipo = tipo.getCod();
 	}
 
 	//hashCode e Equals para comparar o objeto pelo conteudo e nao pela referencia
