@@ -23,7 +23,7 @@ public class DevConfig {
 		
 		if(!"create".equals(strategy)) {
 			return false;
-		}
+		} 
 		
 		service.instantiateTestDataBase();		
 		return true;
