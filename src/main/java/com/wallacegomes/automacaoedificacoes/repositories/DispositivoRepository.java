@@ -2,8 +2,9 @@ package com.wallacegomes.automacaoedificacoes.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.wallacegomes.automacaoedificacoes.domain.TipoEquipamento;
+import com.wallacegomes.automacaoedificacoes.domain.Dispositivo;
 
 @Repository
-public interface TipoEquipamentoRepository extends JpaRepository<TipoEquipamento, Integer>{
+public interface DispositivoRepository extends JpaRepository<Dispositivo, Integer> {
+
 }

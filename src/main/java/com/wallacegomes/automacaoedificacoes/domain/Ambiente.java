@@ -23,6 +23,11 @@ public class Ambiente {
 	private String nome;
 	private String descricao;
 	
+	@JsonBackReference
+	@JsonIgnore
+	@ManyToMany(mappedBy="ambientes") //indica que o mapeamento foi realizado do outro para equipamentos
+	private List<Dispositivo> dispositivos = new ArrayList<>();
+	
 	@JsonManagedReference
 	@ManyToMany
 	@JoinTable(name="AMBIENTE_EQUIPAMENTO",
@@ -30,11 +35,6 @@ public class Ambiente {
 		inverseJoinColumns = @JoinColumn(name="equipamento_id")
 	)	
 	private List<Equipamento> equipamentos = new ArrayList<>();
-	
-	@JsonBackReference
-	@JsonIgnore
-	@ManyToMany(mappedBy="ambientes") //indica que o mapeamento foi realizado do outro para equipamentos
-	private List<Dispositivo> dispositivos = new ArrayList<>();
 	
 	/*
 	@JsonIgnore

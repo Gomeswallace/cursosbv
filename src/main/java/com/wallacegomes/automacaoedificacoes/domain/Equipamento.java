@@ -23,12 +23,6 @@ public class Equipamento implements Serializable{
 	private boolean status;
 	private Integer tipo;
 	
-	/*@JsonManagedReference
-	@ManyToOne
-	@JoinColumn(name="tipoequipamento_id")
-	private TipoEquipamento tipoEquipamento;
-	*/
-	
 	@JsonBackReference
 	@JsonIgnore
 	@ManyToMany(mappedBy="equipamentos") //indica que o mapeamento foi realizado do outro para equipamentos

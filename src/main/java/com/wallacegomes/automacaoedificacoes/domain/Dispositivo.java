@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.wallacegomes.automacaoedificacoes.domain.enums.TipoDispositivo;
 
 @Entity
 public class Dispositivo {
@@ -21,6 +22,7 @@ public class Dispositivo {
 	private Integer id;
 	private String nome;
 	private String descricao;
+	private Integer tipo;
 	
 	@JsonManagedReference
 	@ManyToMany
@@ -33,11 +35,12 @@ public class Dispositivo {
 	public Dispositivo() {		
 	}
 	
-	public Dispositivo(Integer id, String nome, String descricao) {
+	public Dispositivo(Integer id, String nome, String descricao, TipoDispositivo tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
+		this.tipo = tipo.getCod();
 	}
 
 	public Integer getId() {
@@ -70,6 +73,14 @@ public class Dispositivo {
 
 	public void setAmbientes(List<Ambiente> ambientes) {
 		this.ambientes = ambientes;
+	}
+
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
