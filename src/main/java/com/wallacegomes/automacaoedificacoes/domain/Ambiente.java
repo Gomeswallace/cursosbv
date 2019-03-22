@@ -109,4 +109,21 @@ public class Ambiente {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Ambiente [id=");
+		builder.append(id);
+		builder.append(", nome=");
+		builder.append(nome);
+		builder.append(", descricao=");
+		builder.append(descricao);
+		builder.append(", dispositivos=");
+		builder.append(dispositivos);
+		builder.append(", equipamentos=");
+		builder.append(equipamentos);
+		builder.append("]");
+		return builder.toString();
+	}
 }

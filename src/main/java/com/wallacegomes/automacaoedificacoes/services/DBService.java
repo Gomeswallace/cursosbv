@@ -31,8 +31,8 @@ public class DBService {
 		Usuario user1 = new Usuario(null, "Wallace", "wallace@email.com", TipoUsuario.ADMINISTRADOR);
 		user1.getTelefones().addAll(Arrays.asList("9999-9999"));
 		
-		Equipamento ep1 = new Equipamento(null, "Lampada", true, TipoEquipamento.LAMPADA );
-		Equipamento ep2 = new Equipamento(null, "Tomada Luz", false, TipoEquipamento.TOMADA);
+		Equipamento ep1 = new Equipamento(null, "Lampada", 1, true, TipoEquipamento.LAMPADA );
+		Equipamento ep2 = new Equipamento(null, "Tomada Luz", 2, false, TipoEquipamento.TOMADA);
 		
 		Ambiente amb1 = new Ambiente(null, "Sala TV", "Sala embaixo");
 		Ambiente amb2 = new Ambiente(null, "Garagem", "Sala embaixo");

@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.wallacegomes.automacaoedificacoes.services.DBService;
+import com.wallacegomes.automacaoedificacoes.services.EmailService;
+import com.wallacegomes.automacaoedificacoes.services.MockEmailService;
 
 @Configuration //indica que a classe é de configuração
 @Profile("test") //indica o profile (dentro de resources) que este arquivo pertence
@@ -19,6 +21,12 @@ public class TestConfig {
 		
 		service.instantiateTestDataBase();		
 		return true;
+	}
+	
+	//@Bean significa que o spring pode retornar essa chamada
+	@Bean
+	public EmailService emailService() {
+		return new MockEmailService();
 	}
 	
 }

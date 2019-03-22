@@ -20,6 +20,7 @@ public class Equipamento implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY) //geracao de chave primaria
 	private Integer id;
 	private String nome;
+	private Integer porta;
 	private boolean status;
 	private Integer tipo;
 	
@@ -31,10 +32,11 @@ public class Equipamento implements Serializable{
 	public Equipamento() {		
 	}
 
-	public Equipamento(Integer id, String nome, boolean status, TipoEquipamento tipoEquipamento) {
+	public Equipamento(Integer id, String nome, Integer porta, boolean status, TipoEquipamento tipoEquipamento) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.porta = porta;
 		this.status = status;
 		this.tipo = tipoEquipamento.getCod();
 	}
@@ -77,6 +79,14 @@ public class Equipamento implements Serializable{
 
 	public void setTipo(TipoEquipamento tipo) {
 		this.tipo = tipo.getCod();
+	}
+
+	public Integer getPorta() {
+		return porta;
+	}
+
+	public void setPorta(Integer porta) {
+		this.porta = porta;
 	}
 
 	//hashCode e Equals para comparar o objeto pelo conteudo e nao pela referencia

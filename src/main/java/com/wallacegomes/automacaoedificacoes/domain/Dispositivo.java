@@ -107,4 +107,17 @@ public class Dispositivo {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Dispositivo [nome=");
+		builder.append(nome);
+		builder.append(", tipo=");
+		builder.append(tipo);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 }

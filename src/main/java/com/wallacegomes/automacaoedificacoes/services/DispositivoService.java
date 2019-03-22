@@ -13,7 +13,10 @@ import com.wallacegomes.automacaoedificacoes.repositories.DispositivoRepository;
 
 public class DispositivoService {
 	@Autowired
-	public DispositivoRepository repo;
+	private DispositivoRepository repo;
+	
+	@Autowired
+	private EmailService emailService; 
 	
 	public Dispositivo find(Integer id) {
 		Optional<Dispositivo> obj = repo.findById(id);
@@ -48,6 +51,10 @@ public class DispositivoService {
 	public Page<Dispositivo> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public void teste(Dispositivo obj) {
+		emailService.sendOrderConfirmationEmail(obj);;
 	}
 	
 	//public Dispositivo fromDTO(DispositivoDTO objDTO) {

@@ -14,6 +14,7 @@ public class EquipamentoDTO implements Serializable{
 	@NotEmpty(message="Preenchimento obrigatório!")
 	@Length(min=5, max=80, message="O tamanho deve ser entre 3 e 80 caracteres!")
 	private String nome;
+	private Integer porta;
 	private boolean status;
 	private TipoEquipamento tipo; 
 	
@@ -24,6 +25,7 @@ public class EquipamentoDTO implements Serializable{
 	public EquipamentoDTO(Equipamento obj) {
 		id = obj.getId();
 		nome = obj.getNome();
+		porta = obj.getPorta();
 		status = obj.isStatus();
 		tipo = obj.getTipo();
 	}
@@ -58,5 +60,13 @@ public class EquipamentoDTO implements Serializable{
 
 	public void setTipo(TipoEquipamento tipo) {
 		this.tipo = tipo;
+	}
+
+	public Integer getPorta() {
+		return porta;
+	}
+
+	public void setPorta(Integer porta) {
+		this.porta = porta;
 	}	
 }
