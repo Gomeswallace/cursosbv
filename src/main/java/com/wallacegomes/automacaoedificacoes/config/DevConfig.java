@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.wallacegomes.automacaoedificacoes.services.DBService;
+import com.wallacegomes.automacaoedificacoes.services.EmailService;
+import com.wallacegomes.automacaoedificacoes.services.SmtpEmailService;
 
 @Configuration //indica que a classe é de configuração
 @Profile("dev") //indica o profile (dentro de resources) que este arquivo pertence
@@ -27,6 +29,11 @@ public class DevConfig {
 		
 		service.instantiateTestDataBase();		
 		return true;
+	}
+	
+	@Bean
+	public EmailService emailService() {
+		return new SmtpEmailService();
 	}
 	
 }

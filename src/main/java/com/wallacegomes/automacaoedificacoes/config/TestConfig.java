@@ -26,6 +26,7 @@ public class TestConfig {
 	//@Bean significa que o spring pode retornar essa chamada
 	@Bean
 	public EmailService emailService() {
+		//MockEmailservice chama o servico que grava o e-mail no log
 		return new MockEmailService();
 	}
 	

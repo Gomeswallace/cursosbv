@@ -28,7 +28,7 @@ public class DBService {
 	public void instantiateTestDataBase() {
 	
 		
-		Usuario user1 = new Usuario(null, "Wallace", "wallace@email.com", TipoUsuario.ADMINISTRADOR);
+		Usuario user1 = new Usuario(null, "Wallace", "gomes.wallace10@email.com", TipoUsuario.ADMINISTRADOR);
 		user1.getTelefones().addAll(Arrays.asList("9999-9999"));
 		
 		Equipamento ep1 = new Equipamento(null, "Lampada", 1, true, TipoEquipamento.LAMPADA );
@@ -47,6 +47,5 @@ public class DBService {
 		equipamentoRepository.saveAll(Arrays.asList(ep1, ep2));
 		ambienteRepository.saveAll(Arrays.asList(amb1,amb2));
 		
-	}
-	
+	}	
 }
