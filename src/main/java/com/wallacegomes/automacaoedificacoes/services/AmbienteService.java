@@ -2,12 +2,14 @@ package com.wallacegomes.automacaoedificacoes.services;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+
 import com.wallacegomes.automacaoedificacoes.domain.Ambiente;
 import com.wallacegomes.automacaoedificacoes.dto.AmbienteDTO;
 import com.wallacegomes.automacaoedificacoes.repositories.AmbienteRepository;
@@ -29,8 +31,9 @@ public class AmbienteService {
 	}
 	
 	public Ambiente update(Ambiente obj) {
-		find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
-		return repo.save(obj);
+		Ambiente newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
+		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -53,5 +56,10 @@ public class AmbienteService {
 	
 	public Ambiente fromDTO(AmbienteDTO objDTO) {
 			return new Ambiente(objDTO.getId(), objDTO.getNome(), objDTO.getDescricao());
+	}
+	
+	private void updateData(Ambiente newObj, Ambiente obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setDescricao(obj.getDescricao());
 	}
 }

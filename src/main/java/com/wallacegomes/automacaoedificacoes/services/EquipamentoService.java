@@ -36,9 +36,9 @@ public class EquipamentoService {
 	}
 	
 	public Equipamento update(Equipamento obj) {
-		//verifica se o obj existe com o find
-		find(obj.getId());
-		return repo.save(obj);
+		Equipamento newObj = find(obj.getId()); //verifica se o obj existe antes de tentar atualizar
+		updateData(newObj, obj); //Criado o metodo para tratar quais os dados podem ser atualizados
+		return repo.save(newObj);
 	}
 	
 	public void delete(Integer id) {
@@ -61,5 +61,11 @@ public class EquipamentoService {
 	
 	public Equipamento fromDTO(EquipamentoDTO objDTO) {
 			return new Equipamento(objDTO.getId(), objDTO.getNome(), objDTO.getPorta(), objDTO.isStatus(), objDTO.getTipo());
+	}
+	
+	private void updateData(Equipamento newObj, Equipamento obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setPorta(obj.getPorta());
+		newObj.setStatus(obj.isStatus());
 	}
 }

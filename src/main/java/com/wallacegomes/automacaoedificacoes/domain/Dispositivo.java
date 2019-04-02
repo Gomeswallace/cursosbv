@@ -40,7 +40,7 @@ public class Dispositivo {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
 	public Integer getId() {
@@ -117,7 +117,5 @@ public class Dispositivo {
 		builder.append(tipo);
 		builder.append("]");
 		return builder.toString();
-	}
-	
-	
+	}	
 }
