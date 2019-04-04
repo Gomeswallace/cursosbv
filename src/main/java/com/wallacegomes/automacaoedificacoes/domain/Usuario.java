@@ -3,11 +3,13 @@ package com.wallacegomes.automacaoedificacoes.domain;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,13 +37,23 @@ public class Usuario implements Serializable{
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 
-	public Usuario(Integer id, String nome, String email, String senha, TipoUsuario tipoUsuario) {
+	//FetchType.EAGER para buscar junto com o usuario o tipo dele
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="TIPOUSUARIO")
+	private Set<Integer> tiposUsuario = new HashSet<>(); //salva somente o codigo e depois converte
+	
+	private Usuario() {
+		//garante que todo usuario seja cliente
+		addTipoUsuario(TipoUsuario.CLIENTE);
+	}
+	
+	public Usuario(Integer id, String nome, String email, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.tipo = tipoUsuario.getCod();
+		addTipoUsuario(TipoUsuario.CLIENTE);
 	}
 
 	public Integer getId() {
@@ -68,7 +80,6 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	
 	public TipoUsuario getTipo() {
 		return TipoUsuario.toEnum(tipo);
 	}
@@ -91,6 +102,14 @@ public class Usuario implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	
+	public Set<TipoUsuario> getPerfis() {//converte a colecao tiposUsuarios em perfils de usuario 
+		return tiposUsuario.stream().map(x -> TipoUsuario.toEnum(x)).collect(Collectors.toSet());
+	}
+	
+	public void addTipoUsuario(TipoUsuario perfil) {
+		tiposUsuario.add(perfil.getCod());
 	}
 
 	@Override
