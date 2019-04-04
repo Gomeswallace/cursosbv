@@ -5,12 +5,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wallacegomes.automacaoedificacoes.domain.enums.TipoUsuario;
 
 @Entity
@@ -21,19 +23,24 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
+	@Column(unique=true)
 	private String email;
-	//private String senha;
+	
+	@JsonIgnore
+	private String senha;
 	private Integer tipo;
 	
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 
-	public Usuario(Integer id, String nome, String email, TipoUsuario tipoUsuario) {
+	public Usuario(Integer id, String nome, String email, String senha, TipoUsuario tipoUsuario) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
+		this.senha = senha;
 		this.tipo = tipoUsuario.getCod();
 	}
 
@@ -76,6 +83,14 @@ public class Usuario implements Serializable{
 
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	@Override

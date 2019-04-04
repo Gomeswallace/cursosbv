@@ -2,6 +2,7 @@ package com.wallacegomes.automacaoedificacoes.services;
 
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.wallacegomes.automacaoedificacoes.domain.Ambiente;
 import com.wallacegomes.automacaoedificacoes.domain.Equipamento;
@@ -16,6 +17,9 @@ import com.wallacegomes.automacaoedificacoes.repositories.UsuarioRepository;
 public class DBService {
 	
 	@Autowired
+	private BCryptPasswordEncoder pe;
+	
+	@Autowired
 	private EquipamentoRepository equipamentoRepository;
 	
 	@Autowired
@@ -28,7 +32,7 @@ public class DBService {
 	public void instantiateTestDataBase() {
 	
 		
-		Usuario user1 = new Usuario(null, "Wallace", "gomes.wallace10@email.com", TipoUsuario.ADMINISTRADOR);
+		Usuario user1 = new Usuario(null, "Wallace", "gomes.wallace10@email.com", pe.encode("1234"), TipoUsuario.ADMINISTRADOR);
 		user1.getTelefones().addAll(Arrays.asList("9999-9999"));
 		
 		Equipamento ep1 = new Equipamento(null, "Lampada", 1, true, TipoEquipamento.LAMPADA );
@@ -47,5 +51,5 @@ public class DBService {
 		equipamentoRepository.saveAll(Arrays.asList(ep1, ep2));
 		ambienteRepository.saveAll(Arrays.asList(amb1,amb2));
 		
-	}	
+	}
 }
