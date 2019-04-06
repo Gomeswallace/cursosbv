@@ -19,6 +19,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
+import com.wallacegomes.automacaoedificacoes.security.JWTAuthenticationFilter;
+import com.wallacegomes.automacaoedificacoes.security.JWTAuthorizationFilter;
+import com.wallacegomes.automacaoedificacoes.security.JWTUtil;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -30,8 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     private Environment env;
 	
-	//@Autowired
-	//private JWTUtil jwtUtil;
+	@Autowired
+	private JWTUtil jwtUtil;
 	
 	
 	//Vetor que indica quais os caminhos estarao liberados de autenticacao, nao precisam de autenticacao para acesso 
@@ -74,6 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
+	//configuracao responsavel para informar o userDetailService e o encriptador da senha
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
@@ -84,7 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
-		return source;
+		return (CorsConfigurationSource) source;
 	}
 	
 	@Bean //responsavel por criptografar a senha do usuario
