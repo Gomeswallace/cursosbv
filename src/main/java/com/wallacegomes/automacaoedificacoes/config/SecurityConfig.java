@@ -30,8 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     private Environment env;
 	
-	@Autowired
-	private JWTUtil jwtUtil;
+	//@Autowired
+	//private JWTUtil jwtUtil;
+	
 	
 	//Vetor que indica quais os caminhos estarao liberados de autenticacao, nao precisam de autenticacao para acesso 
 	private static final String[] PUBLIC_MATCHERS = {
