@@ -25,7 +25,7 @@ import com.wallacegomes.automacaoedificacoes.security.JWTUtil;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true) //anotacao para usar a autorizacao nos endpoints
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -50,8 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	};
 
 	private static final String[] PUBLIC_MATCHERS_POST = {
-			"/clientes/**",
-			"/auth/forgot/**"
+			"/usuarios/**"
+			//"/auth/forgot/**"
 	};
 
 	@Override

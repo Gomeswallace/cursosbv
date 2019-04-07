@@ -1,8 +1,9 @@
 package com.wallacegomes.automacaoedificacoes.services;
 
-import javax.mail.internet.MimeMessage;
 import org.springframework.mail.SimpleMailMessage;
+
 import com.wallacegomes.automacaoedificacoes.domain.Dispositivo;
+import com.wallacegomes.automacaoedificacoes.domain.Usuario;
 
 public interface EmailService {
 	
@@ -10,8 +11,5 @@ public interface EmailService {
 	
 	void sendEmail(SimpleMailMessage msg);
 	
-	//Envio de e-mail com html
-	void sendOrderConfirmationHtmlEmail(Dispositivo obj);
-
-	void sendHtmlEmail(MimeMessage msg);
+	void sendNewPasswordEmail(Usuario cliente, String newPass);
 }
