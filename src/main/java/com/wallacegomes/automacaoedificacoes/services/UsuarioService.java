@@ -1,5 +1,7 @@
 package com.wallacegomes.automacaoedificacoes.services;
 
+import java.awt.image.BufferedImage;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.applicationautoscaling.model.ObjectNotFoundException;
 import com.wallacegomes.automacaoedificacoes.domain.Usuario;
@@ -46,7 +49,7 @@ public class UsuarioService {
 	private Integer size;
 
 	public Usuario find(Integer id) {
-
+		
 		UserSS user = UserService.authenticated();
 		if (user==null || !user.hasRole(TipoUsuario.ADMINISTRADOR) && !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado");
@@ -123,7 +126,6 @@ public class UsuarioService {
 		newObj.setNome(obj.getNome());
 		newObj.setEmail(obj.getEmail());
 	}
-	
 	/*
 	public URI uploadProfilePicture(MultipartFile multipartFile) {
 		UserSS user = UserService.authenticated();
@@ -140,4 +142,5 @@ public class UsuarioService {
 		return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 	}
 	*/
+	
 }

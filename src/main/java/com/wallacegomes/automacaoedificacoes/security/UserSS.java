@@ -71,6 +71,7 @@ public class UserSS implements UserDetails {
 	}
 	
 	public boolean hasRole(TipoUsuario perfil) {
+		//converte o peril recebido em granted e verifica se contem na lista de authorities
 		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
 	}
 }
