@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.wallacegomes.automacaoedificacoes.security.JWTAuthenticationFilter;
 import com.wallacegomes.automacaoedificacoes.security.JWTAuthorizationFilter;
@@ -37,8 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private JWTUtil jwtUtil;
 	
-	
-	//Vetor que indica quais os caminhos estarao liberados de autenticacao, nao precisam de autenticacao para acesso 
+	//Vetor que indica quais os caminhos nao precisam de autenticacao para acesso 
 	private static final String[] PUBLIC_MATCHERS = {
 			"/h2-console/**"
 	};
@@ -78,18 +77,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	//configuracao responsavel para informar o userDetailService e o encriptador da senha
+	//configuracao responsavel para informar qual o userDetailService e o encriptador da senha
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 	
-	@Bean	//libera o acesso de multiplus caminhos 
+	@Bean
+	//libera o acesso de multiplus caminhos
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
 		configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
-		return (CorsConfigurationSource) source;
+		return source;
 	}
 	
 	@Bean //responsavel por criptografar a senha do usuario

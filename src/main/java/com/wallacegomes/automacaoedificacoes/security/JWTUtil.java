@@ -28,6 +28,7 @@ public class JWTUtil {
 	}
 	
 	public boolean tokenValido(String token) {
+		//claims armazena a reinvidicacoes do token
 		Claims claims = getClaims(token);
 		if (claims != null) {
 			String username = claims.getSubject();

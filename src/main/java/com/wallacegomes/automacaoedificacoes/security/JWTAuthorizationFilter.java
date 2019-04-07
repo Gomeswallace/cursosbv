@@ -27,10 +27,11 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	}
 	
 	@Override
+	//verifica se o token esta valido e continua com a requisicao (funcao chain)
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws IOException, ServletException {
-		
+		//pega o cabecalho da requisicao
 		String header = request.getHeader("Authorization");
 		if (header != null && header.startsWith("Bearer ")) {
 			UsernamePasswordAuthenticationToken auth = getAuthentication(header.substring(7));
