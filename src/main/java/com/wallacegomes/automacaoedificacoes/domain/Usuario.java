@@ -26,7 +26,7 @@ public class Usuario implements Serializable{
 	private Integer id;
 	private String nome;
 	
-	//@Column(unique=true)
+	@Column(unique=true)
 	private String email;
 	
 	@JsonIgnore
@@ -39,7 +39,7 @@ public class Usuario implements Serializable{
 
 	//FetchType.EAGER para buscar junto com o usuario o tipo dele
 	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name="TIPOUSUARIO")
+	@CollectionTable(name="USUARIOTIPO")
 	private Set<Integer> tiposUsuario = new HashSet<>(); //salva somente o codigo e depois converte
 	
 	private Usuario() {
@@ -104,14 +104,14 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 	
-	public Set<TipoUsuario> getPerfis() {//converte a colecao tiposUsuarios em perfils de usuario 
+	public Set<TipoUsuario> getTipos() {//converte a colecao tiposUsuarios em perfils de usuario 
 		return tiposUsuario.stream().map(x -> TipoUsuario.toEnum(x)).collect(Collectors.toSet());
 	}
-	
-	public void addTipoUsuario(TipoUsuario perfil) {
-		tiposUsuario.add(perfil.getCod());
-	}
 
+	public void addTipoUsuario(TipoUsuario tipo) {
+		tiposUsuario.add(tipo.getCod());
+	}
+	 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -119,7 +119,6 @@ public class Usuario implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

@@ -12,9 +12,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JWTUtil {
 	
+	//criar a senha com a palavra embaralhada, do properties
 	@Value("${jwt.secret}")
 	private String secret;
 
+	//pegar o tempo de expiracao da sessao
 	@Value("${jwt.expiration}")
 	private Long expiration;
 	
@@ -23,12 +25,12 @@ public class JWTUtil {
 		return Jwts.builder()
 				.setSubject(username)
 				.setExpiration(new Date(System.currentTimeMillis() + expiration))
-				.signWith(SignatureAlgorithm.HS512, secret.getBytes())
+				.signWith(SignatureAlgorithm.HS512, secret.getBytes()) //tipo de algoritmo para assinar o token
 				.compact();
 	}
 	
 	public boolean tokenValido(String token) {
-		//claims armazena a reinvidicacoes do token
+		//claims armazena as reinvidicacoes do token
 		Claims claims = getClaims(token);
 		if (claims != null) {
 			String username = claims.getSubject();

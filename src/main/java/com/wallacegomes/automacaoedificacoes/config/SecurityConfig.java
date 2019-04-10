@@ -46,11 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String[] PUBLIC_MATCHERS_GET = {
 			"/dispositivos/**",
 			"/ambientes/**",
-			"/equipamentos/**"
+			"/equipamentos/**",
+			"/usuarios/**"
 	};
 
 	private static final String[] PUBLIC_MATCHERS_POST = {
-			"/usuarios/**"
+			//"/usuarios/**"
 			//"/auth/forgot/**"
 	};
 
@@ -70,6 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll() //libera o metodo GET somente para o vetor 
 			.antMatchers(PUBLIC_MATCHERS).permitAll() //permite todos os caminhos deste vetor
 			.anyRequest().authenticated(); //exige autenticacao para todo o resto
+		//add os filtros de autenticacao e autorizacao de tipo usuario
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
 		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		//garante que o backand nao cria sessao do usuario

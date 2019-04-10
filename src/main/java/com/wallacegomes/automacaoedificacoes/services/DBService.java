@@ -28,15 +28,14 @@ public class DBService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	
 	public void instantiateTestDataBase() {
 	
-		
-		Usuario user1 = new Usuario(null, "Wallace", "gomes.wallace10@email.com", pe.encode("1234"));
+		Usuario user1 = new Usuario(null, "Wallace", "gomes.wallace10@email.com", pe.encode("123"));
 		user1.addTipoUsuario(TipoUsuario.ADMINISTRADOR);
 		user1.getTelefones().addAll(Arrays.asList("9999-9999"));
 		
 		Usuario user2 = new Usuario(null, "Maria", "maria@email.com", pe.encode("1234"));
+		user1.addTipoUsuario(TipoUsuario.CLIENTE);
 		user2.getTelefones().addAll(Arrays.asList("1111-9999"));
 		
 		

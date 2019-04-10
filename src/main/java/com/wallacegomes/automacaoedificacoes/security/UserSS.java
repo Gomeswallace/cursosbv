@@ -21,14 +21,14 @@ public class UserSS implements UserDetails {
 	public UserSS() {
 	}
 	
-	public UserSS(Integer id, String email, String senha, Set<TipoUsuario> perfis) {
+	public UserSS(Integer id, String email, String senha, Set<TipoUsuario> tipos) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.senha = senha;
 		
 		//converte a descricao do Enum para o tipo authorities do spring 
-		this.authorities = perfis.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
+		this.authorities = tipos.stream().map(x -> new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
 
 	public Integer getId() {
@@ -71,7 +71,7 @@ public class UserSS implements UserDetails {
 	}
 	
 	public boolean hasRole(TipoUsuario perfil) {
-		//converte o peril recebido em granted e verifica se contem na lista de authorities
+		//converte o tipo recebido em granted e verifica se contem na lista de authorities
 		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
 	}
 }
