@@ -44,7 +44,7 @@ public class DispositivoResource {
 	}
 	
 	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
-	@RequestMapping(value="/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Dispositivo obj, @PathVariable Integer id){
 		obj.setId(id);
 		obj = service.update(obj);

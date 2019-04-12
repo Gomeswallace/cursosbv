@@ -29,6 +29,7 @@ public class AmbienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Ambiente obj){ //converte o obj em json
 		obj = service.insert(obj);
@@ -40,7 +41,8 @@ public class AmbienteResource {
 		return ResponseEntity.created(uri).build();		
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.POST)
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@RequestBody Ambiente obj, @PathVariable Integer id){
 		obj.setId(id);
 		obj = service.update(obj);

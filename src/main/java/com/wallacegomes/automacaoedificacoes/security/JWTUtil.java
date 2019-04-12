@@ -53,6 +53,7 @@ public class JWTUtil {
 	
 	private Claims getClaims(String token) {
 		try {
+			//funcao que recupera as reinvidicacao utilizando o token
 			return Jwts.parser().setSigningKey(secret.getBytes()).parseClaimsJws(token).getBody();
 		}
 		catch (Exception e) {
