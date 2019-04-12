@@ -41,7 +41,7 @@ public class ResourceExceptionHandler {
 	}
 	
 	@ExceptionHandler(AuthorizationException.class)
-	public ResponseEntity<StandardError> authorizationException(ObjectNotFoundException e, HttpServletRequest request){
+	public ResponseEntity<StandardError> authorizationException(AuthorizationException e, HttpServletRequest request){
 		StandardError error = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
  		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
 	}
