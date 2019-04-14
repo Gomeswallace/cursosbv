@@ -9,11 +9,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Service;
 
 import com.wallacegomes.automacaoedificacoes.domain.Ambiente;
 import com.wallacegomes.automacaoedificacoes.dto.AmbienteDTO;
 import com.wallacegomes.automacaoedificacoes.repositories.AmbienteRepository;
 
+@Service
 public class AmbienteService {
 	@Autowired
 	public AmbienteRepository repo;
