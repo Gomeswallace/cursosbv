@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wallacegomes.automacaoedificacoes.dto.EmailDTO;
 import com.wallacegomes.automacaoedificacoes.security.JWTUtil;
 import com.wallacegomes.automacaoedificacoes.security.UserSS;
 import com.wallacegomes.automacaoedificacoes.services.AuthService;
@@ -38,10 +39,9 @@ public class AuthResource {
 		//retorna o objeto com a autorizacao e com o token
 	}
 	
-	/*@RequestMapping(value = "/forgot", method = RequestMethod.POST)
+	@RequestMapping(value = "/forgot", method = RequestMethod.POST)
 	public ResponseEntity<Void> forgot(@Valid @RequestBody EmailDTO objDto) {
 		service.sendNewPassword(objDto.getEmail());
 		return ResponseEntity.noContent().build();
 	}
-	*/
 }
