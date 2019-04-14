@@ -36,8 +36,8 @@ public class UsuarioService {
 	//@Autowired
 	//private S3Service s3Service;
 	
-	@Autowired
-	private ImageService imageService;
+	//@Autowired
+	//private ImageService imageService;
 		
 	@Value("${img.prefix.client.profile}")
 	private String prefix;

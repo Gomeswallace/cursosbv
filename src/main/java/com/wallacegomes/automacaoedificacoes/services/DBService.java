@@ -30,7 +30,7 @@ public class DBService {
 	
 	public void instantiateTestDataBase() {
 	
-		Usuario user1 = new Usuario(null, "Wallace", "gomes.wallace10@email.com", pe.encode("123"));
+		Usuario user1 = new Usuario(null, "Wallace", "gomes.wallace@email.com", pe.encode("123"));
 		user1.addTipoUsuario(TipoUsuario.ADMINISTRADOR);
 		user1.getTelefones().addAll(Arrays.asList("9999-9999"));
 		
